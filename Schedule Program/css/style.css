@@ -1,0 +1,76 @@
+﻿@font-face {
+    font-family: 'Maven-Bold';
+    src: url('/font/MavenPro-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Maven-Regular';
+    src: url('/font/MavenPro-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Maven-Medium';
+    src: url('/font/MavenPro-Medium.ttf') format('truetype');
+}
+
+
+a {
+    color: #FFF;
+}
+    a:hover {
+        color: #808080;
+    }
+.header {
+    font-family: 'Maven-Bold';
+}
+.sub-header {
+    font-family: 'Maven-Medium';
+}
+.nbody {
+    font-family: 'Maven-Regular';
+}
+.footer {
+    background-color: #2E2E2E;
+    color: #FFF;
+}
+.jumbotron {
+    background-color: #2E2E2E !important;
+    color: #FFF;
+}
+
+.border-collapse {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th {
+    text-align: center;
+}
+.td-size {
+    font-size: small;
+}
+.td-xsize {
+    font-size: x-small;
+}
+.center {
+    text-align: center;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.zero-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.button-margin {
+    margin-left: 10px;
+}
+.bottom {
+    margin-bottom: 20px;
+}
+.pleft {
+    padding-left: 10px;
+}
+.pright {
+    padding-right: 10px;
+}

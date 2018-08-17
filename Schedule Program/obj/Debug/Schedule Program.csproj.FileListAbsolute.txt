@@ -1,0 +1,8 @@
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\bin\Schedule Program.dll
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\bin\Schedule Program.pdb
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\obj\Debug\Schedule Program.dll
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\obj\Debug\Schedule Program.pdb
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\obj\Debug\Schedule Program.csprojResolveAssemblyReference.cache
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\bin\itextsharp.dll
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\bin\itextsharp.pdb
+C:\Users\TYPICAL\Documents\Visual Studio 2012\Projects\Schedule Program\Schedule Program\bin\itextsharp.xml
