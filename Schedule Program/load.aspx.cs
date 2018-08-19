@@ -15,11 +15,12 @@ namespace Schedule_Program
         protected void Page_Load(object sender, EventArgs e)
         {
             //***No Direct Access Start***//
-            if (String.IsNullOrEmpty(Request.Form["hmisc"])) 
-                Response.Redirect("main.aspx");
+            if (String.IsNullOrEmpty(Request.Form["hmisc"]))
+                SignalAlert("Error", "Invalid Operation", "main.aspx");
             //***No Direct Access End***//
 
-            //***Employees variables start***//
+
+            //***Employees Init variables start***//
             List<string> textboxes = new List<string> { Request.Form["emp1"], 
                 Request.Form["emp2"], Request.Form["emp3"], Request.Form["emp4"], 
                 Request.Form["emp5"], Request.Form["emp6"], Request.Form["emp7"], 
@@ -32,9 +33,10 @@ namespace Schedule_Program
                 temp.Value = emp;
                 employees.Add(temp);
             }
-            //***Employees variables end***//
+            //***Employees Init variables end***//
 
-            //***Timing Variables***//
+
+            //***Timing Init Variables Start***//
             DateTime startdate;
             DateTime enddate;
             DateTime startdate2;
@@ -71,9 +73,10 @@ namespace Schedule_Program
                 startdate2 = fakeDate;
             }
             int numofweeks = int.Parse(Request.Form["weeks"]);
-            //***Timing variables end***//
+            //***Timing Init Variables end***//
 
-            //***Options variables start***//
+
+            //***Options Init Variables start***//
             bool includesaturdays = bool.Parse(Request.Form["hincludesaturdays"]);
             bool includesundays = bool.Parse(Request.Form["hincludesundays"]);
             bool fullday = bool.Parse(Request.Form["hfullday"]);
@@ -84,7 +87,8 @@ namespace Schedule_Program
             String asst = Request.Form["asst"];
             String aset = Request.Form["aset"];
             String theme = Request.Form["theme"];
-            //***Options variables end***//
+            //***Options Init Variables end***//
+
 
             //***Validate Timings Start***//
             int numweeks = 0;
@@ -119,26 +123,30 @@ namespace Schedule_Program
 
             }
 
+            //***Validate Timings End***//
+
+
+            //Set Schedule Title
             HtmlGenericControl h4 = new HtmlGenericControl("h4");
             h4.InnerHtml = title;
             dtitle.Controls.Add(h4);
-            //***Validate Timings End***//
+
 
             //***Validate Employees Start***//
             //Check Invalid Data
             if (numweeks == 0 || numdays == 0 || numweekdays == 0)
-                Response.Redirect("main.aspx");
+                SignalAlert("Error", "Invalid Date Range", "main.aspx");
 
             //Check Date Range
             if (startdate != fakeDate && enddate != fakeDate)
             {
                 if (numdays < 5)
-                    Response.Redirect("main.aspx");
+                    SignalAlert("Error", "Number of days must be greater than 5", "main.aspx");
             }
             else
             {
                 if (numofweeks <= 0 || startdate2.Equals(fakeDate))
-                    Response.Redirect("main.aspx");
+                    SignalAlert("Error", "Number of weeks must be more than one", "main.aspx");
             }
             /**
              * 
@@ -155,11 +163,11 @@ namespace Schedule_Program
 
             //Check Minimum Employees Allowed
             if (employees.Count < 5)
-                Response.Redirect("main.aspx");
+                SignalAlert("Error", "Number of employees must be more than 4", "main.aspx");
             
             //Check For Minimum Allowed Selection
             if (numdays < employees.Count)
-                Response.Redirect("main.aspx");
+                SignalAlert("Error", "Number of employees must be more than Number of days", "main.aspx");
 
             //Repopulate
             employees = Utility.Repopulate(employees, numdays);
@@ -168,15 +176,17 @@ namespace Schedule_Program
             empdata = Utility.Split(employees, numweeks, numweekdays, fullday);
             //***Validate Employees End***//
 
+
             //***Shift Times and Dates Start***//
             string[] shifttime = fullday ? new string[] { msst + " - " + aset } : new string[] { msst + " - " + asst, asst + " - " + aset };
 
             List<DateTime> dates = startdate != fakeDate && enddate != fakeDate ?
                 Utility.PopulateDates(startdate, enddate, numweekdays, includesaturdays, includesundays) : 
                 Utility.PopulateDates(startdate2, numdays, includesaturdays, includesundays);
-            //***Shift Times and Dates End
+            //***Shift Times and Dates End***//
 
-            //***Render Start***//
+
+            //***Render Tables Start***//
 
             //Implement Rules
             empdata = RuleBook.RuleCompile(empdata, RuleCheck.OneHalfDayShift, fullday, distinct);
@@ -199,12 +209,19 @@ namespace Schedule_Program
                 
                 FrameWork.GetTable(container, empdata.GetValue(i), showdates, numweekdays, i, dates, shifttime, theme, fullday);
             }
-            //***Render End***//
+            //***Render Tables End***//
+
 
             //***Secure PDF Start***//
             FrameWork.GetPDF(empdata, title, showdates, numweekdays, dates, shifttime, theme, fullday);
             //***Secure PDF End***//
         }
-
+        private void SignalAlert(string title, string message, string redirect)
+        {
+            Session["alert"] = true;
+            Session["title"] = title;
+            Session["msg"] = message;
+            Response.Redirect(redirect);
+        }
     }
 }

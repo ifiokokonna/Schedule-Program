@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Schedule_Program
@@ -13,8 +14,7 @@ namespace Schedule_Program
         {
             hmisc.Value = "origin";
 
-
-            ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:$('#alert').modal('show');", true);
+            showAlert();
             
             hincludesaturdays.Value = includesaturdays.Checked.ToString();
             hincludesundays.Value = includesundays.Checked.ToString();
@@ -27,6 +27,8 @@ namespace Schedule_Program
                 weeks.Items.Insert(1, new ListItem("1 Week", "1"));
                 weeks.Items.Insert(2, new ListItem("2 Weeks", "2"));
                 weeks.Items.Insert(3, new ListItem("3 Weeks", "3"));
+                weeks.Items.Insert(4, new ListItem("4 Weeks", "4"));
+                weeks.Items.Insert(5, new ListItem("5 Weeks", "5"));
             }
 
             if (theme.Items.Count == 0)
@@ -111,6 +113,33 @@ namespace Schedule_Program
             {
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.DimGray;
+            }
+        }
+        private void showAlert()
+        {
+            try
+            {
+                if (Session["alert"].Equals(true)
+                        && !String.IsNullOrEmpty(Session["title"].ToString())
+                        && !String.IsNullOrEmpty(Session["msg"].ToString()))
+                {
+                    HtmlGenericControl h4 = new HtmlGenericControl("h4");
+                    h4.InnerHtml = Session["title"].ToString();
+                    h4.Attributes.Add("class", "modal-title");
+                    hdr.Controls.Add(h4);
+
+                    HtmlGenericControl p = new HtmlGenericControl("p");
+                    p.InnerHtml = Session["msg"].ToString();
+                    msg.Controls.Add(p);
+
+                    ClientScript.RegisterStartupScript(GetType(), "Javascript", "javascript:$('#alert').modal('show');", true);
+                }
+                Session["alert"] = false;
+                Session["title"] = "";
+                Session["msg"] = "";
+            }
+            catch (Exception)
+            {
             }
         }
 

@@ -19,19 +19,18 @@
             <!-- Alert Start -->
           <div class="modal fade" id="alert" role="dialog">
             <div class="modal-dialog">
-    
+
               <!-- Alert content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Modal Header</h4>
+                    <asp:PlaceHolder ID="hdr" runat="server"></asp:PlaceHolder>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  
                 </div>
                 <div class="modal-body">
-                  <p>Some text in the modal.</p>
+                    <asp:PlaceHolder ID="msg" runat="server"></asp:PlaceHolder>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
               </div>
       
@@ -129,6 +128,12 @@
 
                         </fieldset>
                 </div>
+                <%-- This system, by default is designed to provide the utmost flexibility in choosing the dates for generating schedules
+                    which includes adding or subtracting saturdays and sundays as working days. Include saturdays and sundays option
+                    has temporarily been disabled due to a known bug and glitch that affects the structural integrity of the application
+                    during runtime. If given more time, will look into this problem.
+                    
+                    For now saturdays and sundays will be included in all generating requests until the bug has been resolved. --%>
                 <div class="col-sm-4">
                       <fieldset>
                         <legend>Options:</legend>

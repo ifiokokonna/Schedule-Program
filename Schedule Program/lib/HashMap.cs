@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Schedule_Program.lib
 {
+    /*
+     * Helper Class for managing list array with repeating items
+     */
     public class HashMap<K, L> : List<L>
     {
         private List<K> key;

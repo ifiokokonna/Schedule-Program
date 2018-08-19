@@ -7,6 +7,10 @@ using System.Web.UI.HtmlControls;
 
 namespace Schedule_Program.lib
 {
+    /*
+     * Class for Managing and Implementing rules on how the tables it to be generated
+     * This Class is apparently designed to modify the rules in the easiest and most flexible way possible
+     */
     public enum RuleCheck
     {
         OneHalfDayShift = 0,

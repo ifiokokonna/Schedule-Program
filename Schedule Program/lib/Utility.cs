@@ -7,14 +7,8 @@ namespace Schedule_Program.lib
 {
     public static class Utility
     {
-        /**
-         * TODO: Finish This Function
-         * TODO: Finish Generate Tables
-         * TODO: Finish Rules 
-         * TODO: Finish PDF
-         * TODO: Sessions Handling
-         * TODO: Validations
-         * TODO: Final Testing
+        /*
+         * Core Class for administering the entire system
          */
         private static Random random = new Random();
         public static List<HtmlInputText> Shuffle(List<HtmlInputText> data)
